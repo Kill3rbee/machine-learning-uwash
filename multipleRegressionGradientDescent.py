@@ -7,29 +7,17 @@ Created on Fri Mar 25 20:03:21 2016
 
 import numpy as np
 
-def get_numpy_data(dataframe, feature_names, output_name):
-    
-    """
-    Get Numpy Data.
-    
-    Converts data to numpy arrays and
-    adds a column for the constant term.
-    
-    Parameters
-    ----------
-    dataframe : pandas dataframe
-    feature_names : array, list of strings
-    output_name: string
-    """
-    
-    dataframe['constant'] = 1
-    feature_names = ['constant'] + feature_names
-    feature_dataframe = dataframe[feature_names]
-    feature_matrix = np.array(feature_dataframe)
-    output_array = dataframe[output_name]
-    output_array = np.array(output_array)
-    return(feature_matrix, output_array)
-    
+# Generating example data and setting initial gradient descent parameters
+constant = np.ones(5)
+x1 = np.array([0,1,2,3,4])
+x2 = np.array([1,2,3,4,5])
+y = np.array([1,3,7,13,21])
+data = np.array([constant, x1, x2]).T
+initial_weights = np.zeros(3)
+step_size = .005
+tolerance = .01
+
+# Defining the helper functions and multiple regression algorithm
 def predict_output(feature_matrix, weights):
     
     """
@@ -76,7 +64,7 @@ def regression_gradient_descent(feature_matrix, output, initial_weights, step_si
     """
     
     converged = False 
-    weights = np.array(initial_weights) # make sure it's a numpy array
+    weights = initial_weights # make sure it's a numpy array
     while not converged:
         # compute the predictions based on feature_matrix and weights using predict_output() function
         predictions = predict_output(feature_matrix, weights)
@@ -88,7 +76,7 @@ def regression_gradient_descent(feature_matrix, output, initial_weights, step_si
             # compute the derivative for weight[i]:
             derivative = feature_derivative(errors, feature_matrix[:, i])
             # add the squared value of the derivative to the gradient sum of squares (for assessing convergence)
-            gradient_sum_squares += derivative**2
+            gradient_sum_squares = derivative**2
             # subtract the step size times the derivative from the current weight
             weights[i] = weights[i] - (step_size*derivative)
         # compute the square-root of the gradient sum of squares to get the gradient matnigude:
@@ -97,12 +85,5 @@ def regression_gradient_descent(feature_matrix, output, initial_weights, step_si
             converged = True
     return(weights)
     
-# Test
-simple_features = ['sqft_living']
-my_output = 'price'
-(simple_feature_matrix, output) = get_numpy_data(train_data, simple_features, my_output)
-initial_weights = np.array([-47000., 1.])
-step_size = 7e-12
-tolerance = 2.5e7
-
-regression_gradient_descent(simple_feature_matrix, output, initial_weights, step_size, tolerance)
+# Fitting the model using the above data and parameters 
+regression_gradient_descent(data, y, initial_weights, step_size, tolerance)
