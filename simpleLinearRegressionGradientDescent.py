@@ -16,8 +16,8 @@ def simpleLinearRegressionGradientDescent(data, step_size, tolerance):
     Parameters
     ----------
     data : 2d array
-    step_size : int value representing the magnitude of the update to the slope and intercept
-    tolerance : int value representing the convergence criteria
+    step_size : float/int value representing the magnitude of the update to the slope and intercept at a given interval
+    tolerance : float/int value representing the convergence criteria
     """
     
     '''
