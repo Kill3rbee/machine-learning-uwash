@@ -59,8 +59,8 @@ def regression_gradient_descent(feature_matrix, output, initial_weights, step_si
     feature_matrix : 2d array
     output: 1d array
     initial_weights: 1 d vector
-    step_size = eta, small sizes
-    tolerance = stopping criteria
+    step_size = int/float value representing eta or the change in magnitude of the coefficients/weights at a given iteration
+    tolerance = int/float value representing the convergence criteria
     """
     
     converged = False 
