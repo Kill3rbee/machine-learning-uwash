@@ -6,6 +6,7 @@ Created on Fri Mar 25 20:03:21 2016
 """
 
 import numpy as np
+from math import sqrt
 
 # Generating example data and setting initial gradient descent parameters
 constant = np.ones(5)
@@ -87,3 +88,4 @@ def regression_gradient_descent(feature_matrix, output, initial_weights, step_si
     
 # Fitting the model using the above data and parameters 
 regression_gradient_descent(data, y, initial_weights, step_size, tolerance)
+
