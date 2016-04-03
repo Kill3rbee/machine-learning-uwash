@@ -7,15 +7,6 @@ Created on Fri Mar 25 20:03:21 2016
 
 import numpy as np
 
-# Generating example data and setting initial gradient descent parameters
-constant = np.ones(5)
-x1 = np.array([0,1,2,3,4])
-x2 = np.array([1,2,3,4,5])
-y = np.array([1,3,7,13,21])
-data = np.array([constant, x1, x2]).T
-initial_weights = np.zeros(3)
-step_size = .005
-
 # Defining the helper functions and multiple regression algorithm
 def predict_output(feature_matrix, weights):
     
@@ -28,7 +19,7 @@ def predict_output(feature_matrix, weights):
     Parameters
     ----------
     feature_matrix : 2d array
-    weights: 1 d vector
+    weights: 1d vector
     """
     
     predictions = np.dot(feature_matrix, weights)
@@ -87,5 +78,14 @@ def ridge_regression_gradient_descent(feature_matrix, output, initial_weights, s
         iterations += 1
     return(weights)
     
+# Generating example data and setting initial gradient descent parameters
+constant = np.ones(5)
+x1 = np.array([0,1,2,3,4])
+x2 = np.array([1,2,3,4,5])
+y = np.array([1,3,7,13,21])
+data = np.array([constant, x1, x2]).T
+initial_weights = np.zeros(3)
+step_size = .005
+
 # Fitting the model using the above data and parameters 
 ridge_regression_gradient_descent(data, y, initial_weights, step_size, 0)

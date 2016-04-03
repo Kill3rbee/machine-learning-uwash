@@ -1,14 +1,6 @@
 import numpy as np
 from math import sqrt
 
-# Generating example data and setting initial gradient descent parameters
-x = np.array([0,1,2,3,4])
-y = np.array([1,3,7,13,21])
-data = np.array([x, y])
-initial_weights = np.array([0])
-step_size = .05
-tolerance = .01
-
 def simpleLinearRegressionGradientDescent(data, step_size, tolerance):
     '''
     Simple Linear Regression Using Gradient Descent
@@ -42,6 +34,14 @@ def simpleLinearRegressionGradientDescent(data, step_size, tolerance):
         if magnitude < tolerance:
             converged = True
     return(intercept, slope)
+    
+# Generating example data and setting initial gradient descent parameters
+x = np.array([0,1,2,3,4])
+y = np.array([1,3,7,13,21])
+data = np.array([x, y])
+initial_weights = np.array([0])
+step_size = .05
+tolerance = .01
 
 # Fitting the model using the above data
 simpleLinearRegressionGradientDescent(data, step_size, tolerance)

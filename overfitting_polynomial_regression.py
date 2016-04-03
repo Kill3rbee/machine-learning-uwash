@@ -15,20 +15,6 @@ from sklearn.linear_model import LinearRegression
 import pandas as pd
 from copy import deepcopy
 
-# Generating example data
-n = 50
-x = np.array([random.random() for i in range(n)])
-x.sort(axis=0)
-y = np.array([math.sin(4*i) for i in x])
-
-# Adding noise to Y
-e = np.array([random.gauss(0,1.0/5.0) for i in range(n)])
-y = y + e
-
-# Converting data to Pandas DataFrame as input to sk-learn models
-data = pd.DataFrame(x, columns=['X1'])
-data['Y'] = y
-
 # Plotting function
 def plot_data(data):    
     plt.plot(data['X1'], data['Y'],'k.')
@@ -92,7 +78,21 @@ def save_plots(data, degree_range):
         plot_poly_predictions(data, model)
         filename = str(i) + '_degree_polynomial'
         plt.savefig(filename)
-        
+
+# Generating example data
+n = 50
+x = np.array([random.random() for i in range(n)])
+x.sort(axis=0)
+y = np.array([math.sin(4*i) for i in x])
+
+# Adding noise to Y
+e = np.array([random.gauss(0,1.0/5.0) for i in range(n)])
+y = y + e
+
+# Converting data to Pandas DataFrame as input to sk-learn models
+data = pd.DataFrame(x, columns=['X1'])
+data['Y'] = y
+
 save_plots(data, 15)
 
 # Specifying the model parameters and plotting the best fit line separately
