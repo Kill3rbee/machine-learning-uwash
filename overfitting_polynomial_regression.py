@@ -9,6 +9,7 @@ Created on Sat Apr  2 16:40:18 2016
 
 import random
 import numpy as np
+import math
 from matplotlib import pyplot as plt
 from sklearn.linear_model import LinearRegression
 import pandas as pd
@@ -21,7 +22,7 @@ x.sort(axis=0)
 y = np.array([math.sin(4*i) for i in x])
 
 # Adding noise to Y
-e = np.array([random.gauss(0,1.0/7.0) for i in range(n)])
+e = np.array([random.gauss(0,1.0/5.0) for i in range(n)])
 y = y + e
 
 # Converting data to Pandas DataFrame as input to sk-learn models
@@ -81,7 +82,7 @@ def plot_poly_predictions(data, model):
     # plot predictions
     plt.plot(x_pred, y_pred, 'g-', label='degree ' + str(deg) + ' fit')
     plt.legend(loc='upper left')
-    plt.axis([0,1,0,1])
+    plt.axis([0,1,-1,1.5])
 
 # Generating and saving charts to visualize overfitting
 def save_plots(data, degree_range):
@@ -89,12 +90,12 @@ def save_plots(data, degree_range):
         plt.clf()
         model = polynomial_regression(data, deg=i)
         plot_poly_predictions(data, model)
-        filename = 'polyreg' + str(i)
+        filename = str(i) + '_degree_polynomial'
         plt.savefig(filename)
         
 save_plots(data, 15)
 
 # Specifying the model parameters and plotting the best fit line separately
 plt.clf()
-model = polynomial_regression(data, deg=10)
+model = polynomial_regression(data, deg=3)
 plot_poly_predictions(data, model)
