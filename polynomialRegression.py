@@ -15,13 +15,13 @@ import pandas as pd
 from copy import deepcopy
 
 # Generating example data
-n = 30
+n = 50
 x = np.array([random.random() for i in range(n)])
 x.sort(axis=0)
 y = np.array([math.sin(4*i) for i in x])
 
 # Adding noise to Y
-e = np.array([random.gauss(0,1.0/5.0) for i in range(n)])
+e = np.array([random.gauss(0,1.0/7.0) for i in range(n)])
 y = y + e
 
 # Converting data to Pandas DataFrame as input to sk-learn models
@@ -85,7 +85,7 @@ def plot_poly_predictions(data, model):
 
 # Generating and saving charts to visualize overfitting
 def save_plots(data, degree_range):
-    for i in range(degree_range + 1):
+    for i in range(1, degree_range):
         plt.clf()
         model = polynomial_regression(data, deg=i)
         plot_poly_predictions(data, model)
@@ -93,3 +93,8 @@ def save_plots(data, degree_range):
         plt.savefig(filename)
         
 save_plots(data, 15)
+
+# Specifying the model parameters and plotting the best fit line separately
+plt.clf()
+model = polynomial_regression(data, deg=10)
+plot_poly_predictions(data, model)
