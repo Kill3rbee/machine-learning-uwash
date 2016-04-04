@@ -7,37 +7,7 @@ Created on Sun Apr  3 13:54:50 2016
 
 import numpy as np
 import math
-
-def normalize_features(feature_matrix):
-    '''
-    Normalize Features.
-    
-    Returns 2d array with normalized features
-
-    Parameters
-    ----------
-    feature_matrix : 2d array
-    '''
-    norms = np.linalg.norm(feature_matrix, axis=0)
-    features = feature_matrix/norms
-    return features, norms
-
-def predict_output(feature_matrix, weights):
-    
-    """
-    Predict Output.
-    
-    Takes in a feature matrix and weights and
-    returns predicted values using dot product.
-    
-    Parameters
-    ----------
-    feature_matrix : 2d array
-    weights: 1d array
-    """
-    
-    predictions = np.dot(feature_matrix, weights)
-    return(predictions)
+from helper_functions import *
     
 def lasso_coordinate_descent_step(i, feature_matrix, output, weights, l1_penalty):
     '''
@@ -116,3 +86,11 @@ tolerance = 1.0
 # Normalizing features and fitting lasso regression
 features, norms = normalize_features(x)
 lasso_cyclical_coordinate_descent(features, y, initial_weights, l1_penalty, tolerance)
+
+# Rescaling the learned weights, because we normalized our feature matrix, 
+# before learning the weights, to use these weights on a test set, we must 
+# normalize the test data in the same way.  
+# Alternatively, we can rescale the learned weights to include the 
+# normalization, so we never have to worry about normalizing the test data.
+
+weights_normalized = weights / norms

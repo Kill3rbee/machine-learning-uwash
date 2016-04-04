@@ -7,24 +7,7 @@ Created on Fri Mar 25 20:03:21 2016
 
 import numpy as np
 from math import sqrt
-
-# Defining the helper functions and multiple regression algorithm
-def predict_output(feature_matrix, weights):
-    
-    """
-    Predict Output.
-    
-    Takes in a feature matrix and weights and
-    returns predicted values using dot product.
-    
-    Parameters
-    ----------
-    feature_matrix : 2d array
-    weights: 1 d vector
-    """
-    
-    predictions = np.dot(feature_matrix, weights)
-    return(predictions)
+from helper_functions import *
 
 def feature_derivative(errors, feature):
     
