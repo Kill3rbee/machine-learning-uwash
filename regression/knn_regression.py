@@ -11,7 +11,7 @@ def distance(observation_q, observation_i):
     distance = np.sqrt(np.sum((observation_q - observation_i)**2))
     return distance
 
-def 1_nearest_neighbor(features, query):
+def one_nearest_neighbor(features, query):
     distance = np.sqrt(np.sum((features - query)**2, axis=1))
     nearest_neighbor = min(distance)
     index = np.where(distance==nearest_neighbor)
